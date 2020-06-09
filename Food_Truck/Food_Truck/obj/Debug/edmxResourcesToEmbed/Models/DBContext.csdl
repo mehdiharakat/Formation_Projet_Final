@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="foodtruckModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Actualite">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="date_de_creation" Type="DateTime" Precision="0" />
+    <Property Name="date_de_validite" Type="DateTime" Precision="0" />
+    <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="imageurl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Utilisateur_creation" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Adresse_facturation">
+    <Key>
+      <PropertyRef Name="id_Adresse_facturation" />
+    </Key>
+    <Property Name="id_Adresse_facturation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code_postal" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="isenable" Type="Boolean" />
+    <Property Name="num_rue" Type="Int32" />
+    <Property Name="pays" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="rue" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ville" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="id_Utilisateur" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Adresse_livraison">
+    <Key>
+      <PropertyRef Name="id_Adresse_livraison" />
+    </Key>
+    <Property Name="id_Adresse_livraison" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code_postal" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="isenable" Type="Boolean" />
+    <Property Name="num_rue" Type="Int32" />
+    <Property Name="pays" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="rue" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ville" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="id_Utilisateur" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Commande">
+    <Key>
+      <PropertyRef Name="id_Commande" />
+    </Key>
+    <Property Name="id_Commande" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dateCommande" Type="DateTime" Precision="0" />
+    <Property Name="num_facture" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="prix_total" Type="Double" Nullable="false" />
+    <Property Name="id_Adresse_facturation" Type="Int32" />
+    <Property Name="id_Adresse_livraison" Type="Int32" />
+    <Property Name="id_StatutCommande" Type="Int32" />
+    <Property Name="id_Utilisateur" Type="Int32" />
+  </EntityType>
+  <EntityType Name="commentaire">
+    <Key>
+      <PropertyRef Name="id_commentaire" />
+    </Key>
+    <Property Name="id_commentaire" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="commentaire1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="date_commentaire" Type="DateTime" Precision="0" />
+    <Property Name="note" Type="Double" Nullable="false" />
+    <Property Name="id_Ligne_Commande" Type="Int32" />
+  </EntityType>
+  <EntityType Name="FamilleRepa">
+    <Key>
+      <PropertyRef Name="id_FamilleRepas" />
+    </Key>
+    <Property Name="id_FamilleRepas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="imageurl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="isenabled" Type="Boolean" Nullable="false" />
+    <Property Name="libelle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Genre">
+    <Key>
+      <PropertyRef Name="id_Genre" />
+    </Key>
+    <Property Name="id_Genre" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="libelle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Ligne_Commande">
+    <Key>
+      <PropertyRef Name="id_Ligne_Commande" />
+    </Key>
+    <Property Name="id_Ligne_Commande" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="prix_unitaire" Type="Double" Nullable="false" />
+    <Property Name="quantite" Type="Int32" />
+    <Property Name="Repas_libelle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="id_Commande" Type="Int32" />
+    <Property Name="id_Produit" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Produit">
+    <Key>
+      <PropertyRef Name="id_Produit" />
+    </Key>
+    <Property Name="id_Produit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="disponibilite" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="image" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="isenable" Type="Boolean" />
+    <Property Name="libellecommercial" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="libelletechnique" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="prix_unitaire" Type="Double" Nullable="false" />
+    <Property Name="stock_dispo" Type="Int32" />
+    <Property Name="id_FamilleRepas" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Profil">
+    <Key>
+      <PropertyRef Name="id_Profil" />
+    </Key>
+    <Property Name="id_Profil" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="libelle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Repa">
+    <Key>
+      <PropertyRef Name="id_Repas" />
+    </Key>
+    <Property Name="id_Repas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="heure_limite" Type="Time" Precision="0" />
+    <Property Name="imageurl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="isenabled" Type="Boolean" Nullable="false" />
+    <Property Name="libelle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Societe">
+    <Key>
+      <PropertyRef Name="id_Societe" />
+    </Key>
+    <Property Name="id_Societe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code_postal" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="nom_Societe" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="num_rue" Type="Int32" />
+    <Property Name="num_siren" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="num_siret" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="pays" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="rue" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ville" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="StatutCommande">
+    <Key>
+      <PropertyRef Name="id_StatutCommande" />
+    </Key>
+    <Property Name="id_StatutCommande" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="libelle_StatutCommande" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Utilisateur">
+    <Key>
+      <PropertyRef Name="id_Utilisateur" />
+    </Key>
+    <Property Name="id_Utilisateur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="date_naissance" Type="DateTime" Precision="0" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="isenable" Type="Boolean" />
+    <Property Name="login" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="prenom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="id_Genre" Type="Int32" />
+    <Property Name="id_Societe" Type="Int32" />
+  </EntityType>
+  <EntityType Name="FamilleRepas_Repas">
+    <Key>
+      <PropertyRef Name="id_FamilleRepas" />
+      <PropertyRef Name="id_Repas" />
+    </Key>
+    <Property Name="id_FamilleRepas" Type="Int32" Nullable="false" />
+    <Property Name="id_Repas" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProfilUtilisateur">
+    <Key>
+      <PropertyRef Name="id_Profil" />
+      <PropertyRef Name="id_Utilisateur" />
+    </Key>
+    <Property Name="id_Profil" Type="Int32" Nullable="false" />
+    <Property Name="id_Utilisateur" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="foodtruckEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Actualites" EntityType="Self.Actualite" />
+    <EntitySet Name="Adresse_facturation" EntityType="Self.Adresse_facturation" />
+    <EntitySet Name="Adresse_livraison" EntityType="Self.Adresse_livraison" />
+    <EntitySet Name="Commandes" EntityType="Self.Commande" />
+    <EntitySet Name="commentaires" EntityType="Self.commentaire" />
+    <EntitySet Name="FamilleRepas" EntityType="Self.FamilleRepa" />
+    <EntitySet Name="Genres" EntityType="Self.Genre" />
+    <EntitySet Name="Ligne_Commande" EntityType="Self.Ligne_Commande" />
+    <EntitySet Name="Produits" EntityType="Self.Produit" />
+    <EntitySet Name="Profils" EntityType="Self.Profil" />
+    <EntitySet Name="Repas" EntityType="Self.Repa" />
+    <EntitySet Name="Societes" EntityType="Self.Societe" />
+    <EntitySet Name="StatutCommandes" EntityType="Self.StatutCommande" />
+    <EntitySet Name="Utilisateurs" EntityType="Self.Utilisateur" />
+    <EntitySet Name="FamilleRepas_Repas" EntityType="Self.FamilleRepas_Repas" />
+    <EntitySet Name="ProfilUtilisateurs" EntityType="Self.ProfilUtilisateur" />
+  </EntityContainer>
+</Schema>

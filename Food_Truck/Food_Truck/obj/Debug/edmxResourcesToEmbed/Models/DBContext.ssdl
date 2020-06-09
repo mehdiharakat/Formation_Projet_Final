@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="foodtruckModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Actualite">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="date_de_creation" Type="datetime2" Precision="0" />
+    <Property Name="date_de_validite" Type="datetime2" Precision="0" />
+    <Property Name="description" Type="varchar" MaxLength="255" />
+    <Property Name="imageurl" Type="varchar" MaxLength="255" />
+    <Property Name="title" Type="varchar" MaxLength="255" />
+    <Property Name="Utilisateur_creation" Type="int" />
+  </EntityType>
+  <EntityType Name="Adresse_facturation">
+    <Key>
+      <PropertyRef Name="id_Adresse_facturation" />
+    </Key>
+    <Property Name="id_Adresse_facturation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code_postal" Type="varchar" MaxLength="255" />
+    <Property Name="isenable" Type="bit" />
+    <Property Name="num_rue" Type="int" />
+    <Property Name="pays" Type="varchar" MaxLength="255" />
+    <Property Name="rue" Type="varchar" MaxLength="255" />
+    <Property Name="ville" Type="varchar" MaxLength="255" />
+    <Property Name="id_Utilisateur" Type="int" />
+  </EntityType>
+  <EntityType Name="Adresse_livraison">
+    <Key>
+      <PropertyRef Name="id_Adresse_livraison" />
+    </Key>
+    <Property Name="id_Adresse_livraison" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code_postal" Type="varchar" MaxLength="255" />
+    <Property Name="isenable" Type="bit" />
+    <Property Name="num_rue" Type="int" />
+    <Property Name="pays" Type="varchar" MaxLength="255" />
+    <Property Name="rue" Type="varchar" MaxLength="255" />
+    <Property Name="ville" Type="varchar" MaxLength="255" />
+    <Property Name="id_Utilisateur" Type="int" />
+  </EntityType>
+  <EntityType Name="Commande">
+    <Key>
+      <PropertyRef Name="id_Commande" />
+    </Key>
+    <Property Name="id_Commande" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dateCommande" Type="date" />
+    <Property Name="num_facture" Type="varchar" MaxLength="255" />
+    <Property Name="prix_total" Type="float" Nullable="false" />
+    <Property Name="id_Adresse_facturation" Type="int" />
+    <Property Name="id_Adresse_livraison" Type="int" />
+    <Property Name="id_StatutCommande" Type="int" />
+    <Property Name="id_Utilisateur" Type="int" />
+  </EntityType>
+  <EntityType Name="commentaire">
+    <Key>
+      <PropertyRef Name="id_commentaire" />
+    </Key>
+    <Property Name="id_commentaire" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="commentaire" Type="varchar" MaxLength="255" />
+    <Property Name="date_commentaire" Type="date" />
+    <Property Name="note" Type="float" Nullable="false" />
+    <Property Name="id_Ligne_Commande" Type="int" />
+  </EntityType>
+  <EntityType Name="FamilleRepas">
+    <Key>
+      <PropertyRef Name="id_FamilleRepas" />
+    </Key>
+    <Property Name="id_FamilleRepas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="imageurl" Type="varchar" MaxLength="255" />
+    <Property Name="isenabled" Type="bit" Nullable="false" />
+    <Property Name="libelle" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'foodtruck.dbo.FamilleRepas_Repas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="FamilleRepas_Repas">
+    <Key>
+      <PropertyRef Name="id_FamilleRepas" />
+      <PropertyRef Name="id_Repas" />
+    </Key>
+    <Property Name="id_FamilleRepas" Type="int" Nullable="false" />
+    <Property Name="id_Repas" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Genre">
+    <Key>
+      <PropertyRef Name="id_Genre" />
+    </Key>
+    <Property Name="id_Genre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="libelle" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Ligne_Commande">
+    <Key>
+      <PropertyRef Name="id_Ligne_Commande" />
+    </Key>
+    <Property Name="id_Ligne_Commande" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="prix_unitaire" Type="float" Nullable="false" />
+    <Property Name="quantite" Type="int" />
+    <Property Name="Repas_libelle" Type="varchar" MaxLength="255" />
+    <Property Name="id_Commande" Type="int" />
+    <Property Name="id_Produit" Type="int" />
+  </EntityType>
+  <EntityType Name="Produit">
+    <Key>
+      <PropertyRef Name="id_Produit" />
+    </Key>
+    <Property Name="id_Produit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="description" Type="varchar(max)" />
+    <Property Name="disponibilite" Type="varchar" MaxLength="255" />
+    <Property Name="image" Type="varchar" MaxLength="255" />
+    <Property Name="isenable" Type="bit" />
+    <Property Name="libellecommercial" Type="varchar" MaxLength="255" />
+    <Property Name="libelletechnique" Type="varchar" MaxLength="255" />
+    <Property Name="prix_unitaire" Type="float" Nullable="false" />
+    <Property Name="stock_dispo" Type="int" />
+    <Property Name="id_FamilleRepas" Type="int" />
+  </EntityType>
+  <EntityType Name="Profil">
+    <Key>
+      <PropertyRef Name="id_Profil" />
+    </Key>
+    <Property Name="id_Profil" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="libelle" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'foodtruck.dbo.ProfilUtilisateur' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ProfilUtilisateur">
+    <Key>
+      <PropertyRef Name="id_Profil" />
+      <PropertyRef Name="id_Utilisateur" />
+    </Key>
+    <Property Name="id_Profil" Type="int" Nullable="false" />
+    <Property Name="id_Utilisateur" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Repas">
+    <Key>
+      <PropertyRef Name="id_Repas" />
+    </Key>
+    <Property Name="id_Repas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="heure_limite" Type="time" Precision="0" />
+    <Property Name="imageurl" Type="varchar" MaxLength="255" />
+    <Property Name="isenabled" Type="bit" Nullable="false" />
+    <Property Name="libelle" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Societe">
+    <Key>
+      <PropertyRef Name="id_Societe" />
+    </Key>
+    <Property Name="id_Societe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code_postal" Type="varchar" MaxLength="255" />
+    <Property Name="nom_Societe" Type="varchar" MaxLength="255" />
+    <Property Name="num_rue" Type="int" />
+    <Property Name="num_siren" Type="varchar" MaxLength="255" />
+    <Property Name="num_siret" Type="varchar" MaxLength="255" />
+    <Property Name="pays" Type="varchar" MaxLength="255" />
+    <Property Name="rue" Type="varchar" MaxLength="255" />
+    <Property Name="ville" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="StatutCommande">
+    <Key>
+      <PropertyRef Name="id_StatutCommande" />
+    </Key>
+    <Property Name="id_StatutCommande" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="libelle_StatutCommande" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Utilisateur">
+    <Key>
+      <PropertyRef Name="id_Utilisateur" />
+    </Key>
+    <Property Name="id_Utilisateur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date_naissance" Type="date" />
+    <Property Name="email" Type="varchar" MaxLength="255" />
+    <Property Name="isenable" Type="bit" />
+    <Property Name="login" Type="varchar" MaxLength="255" />
+    <Property Name="nom" Type="varchar" MaxLength="255" />
+    <Property Name="password" Type="varchar" MaxLength="255" />
+    <Property Name="prenom" Type="varchar" MaxLength="255" />
+    <Property Name="id_Genre" Type="int" />
+    <Property Name="id_Societe" Type="int" />
+  </EntityType>
+  <EntityContainer Name="foodtruckModelStoreContainer">
+    <EntitySet Name="Actualite" EntityType="Self.Actualite" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Adresse_facturation" EntityType="Self.Adresse_facturation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Adresse_livraison" EntityType="Self.Adresse_livraison" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Commande" EntityType="Self.Commande" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="commentaire" EntityType="Self.commentaire" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FamilleRepas" EntityType="Self.FamilleRepas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ligne_Commande" EntityType="Self.Ligne_Commande" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Produit" EntityType="Self.Produit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Profil" EntityType="Self.Profil" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Repas" EntityType="Self.Repas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Societe" EntityType="Self.Societe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StatutCommande" EntityType="Self.StatutCommande" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Utilisateur" EntityType="Self.Utilisateur" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FamilleRepas_Repas" EntityType="Self.FamilleRepas_Repas" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [FamilleRepas_Repas].[id_FamilleRepas] AS [id_FamilleRepas], 
+    [FamilleRepas_Repas].[id_Repas] AS [id_Repas]
+    FROM [dbo].[FamilleRepas_Repas] AS [FamilleRepas_Repas]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ProfilUtilisateur" EntityType="Self.ProfilUtilisateur" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ProfilUtilisateur].[id_Profil] AS [id_Profil], 
+    [ProfilUtilisateur].[id_Utilisateur] AS [id_Utilisateur]
+    FROM [dbo].[ProfilUtilisateur] AS [ProfilUtilisateur]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

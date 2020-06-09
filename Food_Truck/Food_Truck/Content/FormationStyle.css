@@ -1,0 +1,213 @@
+﻿.col-border {
+    border-right-style: solid;
+    border-right-color: whitesmoke;
+    padding: 20px;
+    margin: 0px 10px;
+}
+
+.col-border-formation {
+    height: 200px;
+    width: 300px;
+    border: orange solid 2px;
+    border-radius: 11px;
+    padding: 8px;
+    text-align: center;
+    background-color: white;
+    margin:3px;
+}
+.col-border-cells {
+    height: 400px;
+    width: 800px;
+    border: orange solid 2px;
+    border-radius: 11px;
+    padding: 8px;
+    text-align: center;
+    background-color: white;
+    margin:3px;
+}
+.center-div {
+ margin-left: 10%;
+}
+
+
+.flickity-enabled {
+  position: relative;
+}
+
+.flickity-enabled:focus { outline: none; }
+
+.flickity-viewport {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+}
+
+.flickity-slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* draggable */
+
+.flickity-enabled.is-draggable {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.flickity-enabled.is-draggable .flickity-viewport {
+  cursor: move;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.flickity-enabled.is-draggable .flickity-viewport.is-pointer-down {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+/* ---- previous/next buttons ---- */
+
+.flickity-prev-next-button {
+  position: absolute;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: white;
+  background: hsla(0, 0%, 100%, 0.75);
+  cursor: pointer;
+  /* vertically center */
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.flickity-prev-next-button:hover { background: white; }
+
+.flickity-prev-next-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 5px #09F;
+}
+
+.flickity-prev-next-button:active {
+  filter: alpha(opacity=60); /* IE8 */
+  opacity: 0.6;
+}
+
+.flickity-prev-next-button.previous { left: 10px; }
+.flickity-prev-next-button.next { right: 10px; }
+/* right to left */
+.flickity-rtl .flickity-prev-next-button.previous {
+  left: auto;
+  right: 10px;
+}
+.flickity-rtl .flickity-prev-next-button.next {
+  right: auto;
+  left: 10px;
+}
+
+.flickity-prev-next-button:disabled {
+  filter: alpha(opacity=30); /* IE8 */
+  opacity: 0.3;
+  cursor: auto;
+}
+
+.flickity-prev-next-button svg {
+  position: absolute;
+  left: 20%;
+  top: 20%;
+  width: 60%;
+  height: 60%;
+}
+
+.flickity-prev-next-button .arrow {
+  fill: #333;
+}
+
+/* color & size if no SVG - IE8 and Android 2.3 */
+.flickity-prev-next-button.no-svg {
+  color: orange;
+  font-size: 26px;
+}
+
+/* ---- page dots ---- */
+
+.flickity-page-dots {
+  position: absolute;
+  width: 100%;
+  bottom: -25px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+  line-height: 1;
+}
+
+.flickity-rtl .flickity-page-dots { direction: rtl; }
+
+.flickity-page-dots .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 8px;
+  background: #333;
+  border-radius: 50%;
+  filter: alpha(opacity=25); /* IE8 */
+  opacity: 0.25;
+  cursor: pointer;
+}
+
+.flickity-page-dots .dot.is-selected {
+  filter: alpha(opacity=100); /* IE8 */
+  opacity: 1;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body { font-family: sans-serif; }
+
+.gallery {
+  background: #EEE;
+  margin-top : 5px;
+  margin-bottom : 10px;
+}
+
+.gallery-cell {
+  width: 66%;
+  height: 200px;
+  margin-right: 10px;
+  background: #FFA500;
+}
+
+/* cell number */
+.gallery-cell:before {
+  display: block;
+  text-align: center;
+  
+  line-height: 200px;
+  font-size: 80px;
+  color: white;
+}
+
+.container_img {
+  position: relative;
+  max-width: 800px; /* Maximum width */
+  margin: 0 auto; /* Center it */
+}
+.container_img img {vertical-align: middle;}
+.container_img .content_img {
+  position: absolute; /* Position the background text */
+  top: 0; /* At the bottom. Use top:0 to append it to the top */
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color:lavenderblush; /* #f1f1f1; /* Grey text */
+  width: 100%; /* Full width */
+  padding: 20px; /* Some padding */
+}

@@ -1,0 +1,622 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="foodtruckModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Actualite">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="date_de_creation" Type="datetime2" Precision="0" />
+          <Property Name="date_de_validite" Type="datetime2" Precision="0" />
+          <Property Name="description" Type="varchar" MaxLength="255" />
+          <Property Name="imageurl" Type="varchar" MaxLength="255" />
+          <Property Name="title" Type="varchar" MaxLength="255" />
+          <Property Name="Utilisateur_creation" Type="int" />
+        </EntityType>
+        <EntityType Name="Adresse_facturation">
+          <Key>
+            <PropertyRef Name="id_Adresse_facturation" />
+          </Key>
+          <Property Name="id_Adresse_facturation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code_postal" Type="varchar" MaxLength="255" />
+          <Property Name="isenable" Type="bit" />
+          <Property Name="num_rue" Type="int" />
+          <Property Name="pays" Type="varchar" MaxLength="255" />
+          <Property Name="rue" Type="varchar" MaxLength="255" />
+          <Property Name="ville" Type="varchar" MaxLength="255" />
+          <Property Name="id_Utilisateur" Type="int" />
+        </EntityType>
+        <EntityType Name="Adresse_livraison">
+          <Key>
+            <PropertyRef Name="id_Adresse_livraison" />
+          </Key>
+          <Property Name="id_Adresse_livraison" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code_postal" Type="varchar" MaxLength="255" />
+          <Property Name="isenable" Type="bit" />
+          <Property Name="num_rue" Type="int" />
+          <Property Name="pays" Type="varchar" MaxLength="255" />
+          <Property Name="rue" Type="varchar" MaxLength="255" />
+          <Property Name="ville" Type="varchar" MaxLength="255" />
+          <Property Name="id_Utilisateur" Type="int" />
+        </EntityType>
+        <EntityType Name="Commande">
+          <Key>
+            <PropertyRef Name="id_Commande" />
+          </Key>
+          <Property Name="id_Commande" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dateCommande" Type="date" />
+          <Property Name="num_facture" Type="varchar" MaxLength="255" />
+          <Property Name="prix_total" Type="float" Nullable="false" />
+          <Property Name="id_Adresse_facturation" Type="int" />
+          <Property Name="id_Adresse_livraison" Type="int" />
+          <Property Name="id_StatutCommande" Type="int" />
+          <Property Name="id_Utilisateur" Type="int" />
+        </EntityType>
+        <EntityType Name="commentaire">
+          <Key>
+            <PropertyRef Name="id_commentaire" />
+          </Key>
+          <Property Name="id_commentaire" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="commentaire" Type="varchar" MaxLength="255" />
+          <Property Name="date_commentaire" Type="date" />
+          <Property Name="note" Type="float" Nullable="false" />
+          <Property Name="id_Ligne_Commande" Type="int" />
+        </EntityType>
+        <EntityType Name="FamilleRepas">
+          <Key>
+            <PropertyRef Name="id_FamilleRepas" />
+          </Key>
+          <Property Name="id_FamilleRepas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imageurl" Type="varchar" MaxLength="255" />
+          <Property Name="isenabled" Type="bit" Nullable="false" />
+          <Property Name="libelle" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'foodtruck.dbo.FamilleRepas_Repas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FamilleRepas_Repas">
+          <Key>
+            <PropertyRef Name="id_FamilleRepas" />
+            <PropertyRef Name="id_Repas" />
+          </Key>
+          <Property Name="id_FamilleRepas" Type="int" Nullable="false" />
+          <Property Name="id_Repas" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="id_Genre" />
+          </Key>
+          <Property Name="id_Genre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelle" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Ligne_Commande">
+          <Key>
+            <PropertyRef Name="id_Ligne_Commande" />
+          </Key>
+          <Property Name="id_Ligne_Commande" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prix_unitaire" Type="float" Nullable="false" />
+          <Property Name="quantite" Type="int" />
+          <Property Name="Repas_libelle" Type="varchar" MaxLength="255" />
+          <Property Name="id_Commande" Type="int" />
+          <Property Name="id_Produit" Type="int" />
+        </EntityType>
+        <EntityType Name="Produit">
+          <Key>
+            <PropertyRef Name="id_Produit" />
+          </Key>
+          <Property Name="id_Produit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" />
+          <Property Name="disponibilite" Type="varchar" MaxLength="255" />
+          <Property Name="image" Type="varchar" MaxLength="255" />
+          <Property Name="isenable" Type="bit" />
+          <Property Name="libellecommercial" Type="varchar" MaxLength="255" />
+          <Property Name="libelletechnique" Type="varchar" MaxLength="255" />
+          <Property Name="prix_unitaire" Type="float" Nullable="false" />
+          <Property Name="stock_dispo" Type="int" />
+          <Property Name="id_FamilleRepas" Type="int" />
+        </EntityType>
+        <EntityType Name="Profil">
+          <Key>
+            <PropertyRef Name="id_Profil" />
+          </Key>
+          <Property Name="id_Profil" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelle" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'foodtruck.dbo.ProfilUtilisateur' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProfilUtilisateur">
+          <Key>
+            <PropertyRef Name="id_Profil" />
+            <PropertyRef Name="id_Utilisateur" />
+          </Key>
+          <Property Name="id_Profil" Type="int" Nullable="false" />
+          <Property Name="id_Utilisateur" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Repas">
+          <Key>
+            <PropertyRef Name="id_Repas" />
+          </Key>
+          <Property Name="id_Repas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="heure_limite" Type="time" Precision="0" />
+          <Property Name="imageurl" Type="varchar" MaxLength="255" />
+          <Property Name="isenabled" Type="bit" Nullable="false" />
+          <Property Name="libelle" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Societe">
+          <Key>
+            <PropertyRef Name="id_Societe" />
+          </Key>
+          <Property Name="id_Societe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code_postal" Type="varchar" MaxLength="255" />
+          <Property Name="nom_Societe" Type="varchar" MaxLength="255" />
+          <Property Name="num_rue" Type="int" />
+          <Property Name="num_siren" Type="varchar" MaxLength="255" />
+          <Property Name="num_siret" Type="varchar" MaxLength="255" />
+          <Property Name="pays" Type="varchar" MaxLength="255" />
+          <Property Name="rue" Type="varchar" MaxLength="255" />
+          <Property Name="ville" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="StatutCommande">
+          <Key>
+            <PropertyRef Name="id_StatutCommande" />
+          </Key>
+          <Property Name="id_StatutCommande" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelle_StatutCommande" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="id_Utilisateur" />
+          </Key>
+          <Property Name="id_Utilisateur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date_naissance" Type="date" />
+          <Property Name="email" Type="varchar" MaxLength="255" />
+          <Property Name="isenable" Type="bit" />
+          <Property Name="login" Type="varchar" MaxLength="255" />
+          <Property Name="nom" Type="varchar" MaxLength="255" />
+          <Property Name="password" Type="varchar" MaxLength="255" />
+          <Property Name="prenom" Type="varchar" MaxLength="255" />
+          <Property Name="id_Genre" Type="int" />
+          <Property Name="id_Societe" Type="int" />
+        </EntityType>
+        <EntityContainer Name="foodtruckModelStoreContainer">
+          <EntitySet Name="Actualite" EntityType="Self.Actualite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Adresse_facturation" EntityType="Self.Adresse_facturation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Adresse_livraison" EntityType="Self.Adresse_livraison" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Commande" EntityType="Self.Commande" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="commentaire" EntityType="Self.commentaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FamilleRepas" EntityType="Self.FamilleRepas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ligne_Commande" EntityType="Self.Ligne_Commande" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produit" EntityType="Self.Produit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profil" EntityType="Self.Profil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Repas" EntityType="Self.Repas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Societe" EntityType="Self.Societe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatutCommande" EntityType="Self.StatutCommande" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utilisateur" EntityType="Self.Utilisateur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FamilleRepas_Repas" EntityType="Self.FamilleRepas_Repas" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FamilleRepas_Repas].[id_FamilleRepas] AS [id_FamilleRepas], 
+    [FamilleRepas_Repas].[id_Repas] AS [id_Repas]
+    FROM [dbo].[FamilleRepas_Repas] AS [FamilleRepas_Repas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ProfilUtilisateur" EntityType="Self.ProfilUtilisateur" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProfilUtilisateur].[id_Profil] AS [id_Profil], 
+    [ProfilUtilisateur].[id_Utilisateur] AS [id_Utilisateur]
+    FROM [dbo].[ProfilUtilisateur] AS [ProfilUtilisateur]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="foodtruckModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Actualite">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="date_de_creation" Type="DateTime" Precision="0" />
+          <Property Name="date_de_validite" Type="DateTime" Precision="0" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="imageurl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Utilisateur_creation" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Adresse_facturation">
+          <Key>
+            <PropertyRef Name="id_Adresse_facturation" />
+          </Key>
+          <Property Name="id_Adresse_facturation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code_postal" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="isenable" Type="Boolean" />
+          <Property Name="num_rue" Type="Int32" />
+          <Property Name="pays" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="rue" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ville" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="id_Utilisateur" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Adresse_livraison">
+          <Key>
+            <PropertyRef Name="id_Adresse_livraison" />
+          </Key>
+          <Property Name="id_Adresse_livraison" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code_postal" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="isenable" Type="Boolean" />
+          <Property Name="num_rue" Type="Int32" />
+          <Property Name="pays" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="rue" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ville" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="id_Utilisateur" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Commande">
+          <Key>
+            <PropertyRef Name="id_Commande" />
+          </Key>
+          <Property Name="id_Commande" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dateCommande" Type="DateTime" Precision="0" />
+          <Property Name="num_facture" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="prix_total" Type="Double" Nullable="false" />
+          <Property Name="id_Adresse_facturation" Type="Int32" />
+          <Property Name="id_Adresse_livraison" Type="Int32" />
+          <Property Name="id_StatutCommande" Type="Int32" />
+          <Property Name="id_Utilisateur" Type="Int32" />
+        </EntityType>
+        <EntityType Name="commentaire">
+          <Key>
+            <PropertyRef Name="id_commentaire" />
+          </Key>
+          <Property Name="id_commentaire" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="commentaire1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="date_commentaire" Type="DateTime" Precision="0" />
+          <Property Name="note" Type="Double" Nullable="false" />
+          <Property Name="id_Ligne_Commande" Type="Int32" />
+        </EntityType>
+        <EntityType Name="FamilleRepa">
+          <Key>
+            <PropertyRef Name="id_FamilleRepas" />
+          </Key>
+          <Property Name="id_FamilleRepas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imageurl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="isenabled" Type="Boolean" Nullable="false" />
+          <Property Name="libelle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="id_Genre" />
+          </Key>
+          <Property Name="id_Genre" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Ligne_Commande">
+          <Key>
+            <PropertyRef Name="id_Ligne_Commande" />
+          </Key>
+          <Property Name="id_Ligne_Commande" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prix_unitaire" Type="Double" Nullable="false" />
+          <Property Name="quantite" Type="Int32" />
+          <Property Name="Repas_libelle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="id_Commande" Type="Int32" />
+          <Property Name="id_Produit" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Produit">
+          <Key>
+            <PropertyRef Name="id_Produit" />
+          </Key>
+          <Property Name="id_Produit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="disponibilite" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="image" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="isenable" Type="Boolean" />
+          <Property Name="libellecommercial" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="libelletechnique" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="prix_unitaire" Type="Double" Nullable="false" />
+          <Property Name="stock_dispo" Type="Int32" />
+          <Property Name="id_FamilleRepas" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Profil">
+          <Key>
+            <PropertyRef Name="id_Profil" />
+          </Key>
+          <Property Name="id_Profil" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Repa">
+          <Key>
+            <PropertyRef Name="id_Repas" />
+          </Key>
+          <Property Name="id_Repas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="heure_limite" Type="Time" Precision="0" />
+          <Property Name="imageurl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="isenabled" Type="Boolean" Nullable="false" />
+          <Property Name="libelle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Societe">
+          <Key>
+            <PropertyRef Name="id_Societe" />
+          </Key>
+          <Property Name="id_Societe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code_postal" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="nom_Societe" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="num_rue" Type="Int32" />
+          <Property Name="num_siren" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="num_siret" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="pays" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="rue" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ville" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="StatutCommande">
+          <Key>
+            <PropertyRef Name="id_StatutCommande" />
+          </Key>
+          <Property Name="id_StatutCommande" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle_StatutCommande" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="id_Utilisateur" />
+          </Key>
+          <Property Name="id_Utilisateur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date_naissance" Type="DateTime" Precision="0" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="isenable" Type="Boolean" />
+          <Property Name="login" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="prenom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="id_Genre" Type="Int32" />
+          <Property Name="id_Societe" Type="Int32" />
+        </EntityType>
+        <EntityType Name="FamilleRepas_Repas">
+          <Key>
+            <PropertyRef Name="id_FamilleRepas" />
+            <PropertyRef Name="id_Repas" />
+          </Key>
+          <Property Name="id_FamilleRepas" Type="Int32" Nullable="false" />
+          <Property Name="id_Repas" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProfilUtilisateur">
+          <Key>
+            <PropertyRef Name="id_Profil" />
+            <PropertyRef Name="id_Utilisateur" />
+          </Key>
+          <Property Name="id_Profil" Type="Int32" Nullable="false" />
+          <Property Name="id_Utilisateur" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="foodtruckEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actualites" EntityType="Self.Actualite" />
+          <EntitySet Name="Adresse_facturation" EntityType="Self.Adresse_facturation" />
+          <EntitySet Name="Adresse_livraison" EntityType="Self.Adresse_livraison" />
+          <EntitySet Name="Commandes" EntityType="Self.Commande" />
+          <EntitySet Name="commentaires" EntityType="Self.commentaire" />
+          <EntitySet Name="FamilleRepas" EntityType="Self.FamilleRepa" />
+          <EntitySet Name="Genres" EntityType="Self.Genre" />
+          <EntitySet Name="Ligne_Commande" EntityType="Self.Ligne_Commande" />
+          <EntitySet Name="Produits" EntityType="Self.Produit" />
+          <EntitySet Name="Profils" EntityType="Self.Profil" />
+          <EntitySet Name="Repas" EntityType="Self.Repa" />
+          <EntitySet Name="Societes" EntityType="Self.Societe" />
+          <EntitySet Name="StatutCommandes" EntityType="Self.StatutCommande" />
+          <EntitySet Name="Utilisateurs" EntityType="Self.Utilisateur" />
+          <EntitySet Name="FamilleRepas_Repas" EntityType="Self.FamilleRepas_Repas" />
+          <EntitySet Name="ProfilUtilisateurs" EntityType="Self.ProfilUtilisateur" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="foodtruckModelStoreContainer" CdmEntityContainer="foodtruckEntities">
+          <EntitySetMapping Name="Actualites">
+            <EntityTypeMapping TypeName="foodtruckModel.Actualite">
+              <MappingFragment StoreEntitySet="Actualite">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date_de_creation" ColumnName="date_de_creation" />
+                <ScalarProperty Name="date_de_validite" ColumnName="date_de_validite" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="imageurl" ColumnName="imageurl" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="Utilisateur_creation" ColumnName="Utilisateur_creation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Adresse_facturation">
+            <EntityTypeMapping TypeName="foodtruckModel.Adresse_facturation">
+              <MappingFragment StoreEntitySet="Adresse_facturation">
+                <ScalarProperty Name="id_Adresse_facturation" ColumnName="id_Adresse_facturation" />
+                <ScalarProperty Name="code_postal" ColumnName="code_postal" />
+                <ScalarProperty Name="isenable" ColumnName="isenable" />
+                <ScalarProperty Name="num_rue" ColumnName="num_rue" />
+                <ScalarProperty Name="pays" ColumnName="pays" />
+                <ScalarProperty Name="rue" ColumnName="rue" />
+                <ScalarProperty Name="ville" ColumnName="ville" />
+                <ScalarProperty Name="id_Utilisateur" ColumnName="id_Utilisateur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Adresse_livraison">
+            <EntityTypeMapping TypeName="foodtruckModel.Adresse_livraison">
+              <MappingFragment StoreEntitySet="Adresse_livraison">
+                <ScalarProperty Name="id_Adresse_livraison" ColumnName="id_Adresse_livraison" />
+                <ScalarProperty Name="code_postal" ColumnName="code_postal" />
+                <ScalarProperty Name="isenable" ColumnName="isenable" />
+                <ScalarProperty Name="num_rue" ColumnName="num_rue" />
+                <ScalarProperty Name="pays" ColumnName="pays" />
+                <ScalarProperty Name="rue" ColumnName="rue" />
+                <ScalarProperty Name="ville" ColumnName="ville" />
+                <ScalarProperty Name="id_Utilisateur" ColumnName="id_Utilisateur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commandes">
+            <EntityTypeMapping TypeName="foodtruckModel.Commande">
+              <MappingFragment StoreEntitySet="Commande">
+                <ScalarProperty Name="id_Commande" ColumnName="id_Commande" />
+                <ScalarProperty Name="dateCommande" ColumnName="dateCommande" />
+                <ScalarProperty Name="num_facture" ColumnName="num_facture" />
+                <ScalarProperty Name="prix_total" ColumnName="prix_total" />
+                <ScalarProperty Name="id_Adresse_facturation" ColumnName="id_Adresse_facturation" />
+                <ScalarProperty Name="id_Adresse_livraison" ColumnName="id_Adresse_livraison" />
+                <ScalarProperty Name="id_StatutCommande" ColumnName="id_StatutCommande" />
+                <ScalarProperty Name="id_Utilisateur" ColumnName="id_Utilisateur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="commentaires">
+            <EntityTypeMapping TypeName="foodtruckModel.commentaire">
+              <MappingFragment StoreEntitySet="commentaire">
+                <ScalarProperty Name="id_commentaire" ColumnName="id_commentaire" />
+                <ScalarProperty Name="commentaire1" ColumnName="commentaire" />
+                <ScalarProperty Name="date_commentaire" ColumnName="date_commentaire" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="id_Ligne_Commande" ColumnName="id_Ligne_Commande" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FamilleRepas">
+            <EntityTypeMapping TypeName="foodtruckModel.FamilleRepa">
+              <MappingFragment StoreEntitySet="FamilleRepas">
+                <ScalarProperty Name="id_FamilleRepas" ColumnName="id_FamilleRepas" />
+                <ScalarProperty Name="imageurl" ColumnName="imageurl" />
+                <ScalarProperty Name="isenabled" ColumnName="isenabled" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="foodtruckModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="id_Genre" ColumnName="id_Genre" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ligne_Commande">
+            <EntityTypeMapping TypeName="foodtruckModel.Ligne_Commande">
+              <MappingFragment StoreEntitySet="Ligne_Commande">
+                <ScalarProperty Name="id_Ligne_Commande" ColumnName="id_Ligne_Commande" />
+                <ScalarProperty Name="prix_unitaire" ColumnName="prix_unitaire" />
+                <ScalarProperty Name="quantite" ColumnName="quantite" />
+                <ScalarProperty Name="Repas_libelle" ColumnName="Repas_libelle" />
+                <ScalarProperty Name="id_Commande" ColumnName="id_Commande" />
+                <ScalarProperty Name="id_Produit" ColumnName="id_Produit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produits">
+            <EntityTypeMapping TypeName="foodtruckModel.Produit">
+              <MappingFragment StoreEntitySet="Produit">
+                <ScalarProperty Name="id_Produit" ColumnName="id_Produit" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="disponibilite" ColumnName="disponibilite" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="isenable" ColumnName="isenable" />
+                <ScalarProperty Name="libellecommercial" ColumnName="libellecommercial" />
+                <ScalarProperty Name="libelletechnique" ColumnName="libelletechnique" />
+                <ScalarProperty Name="prix_unitaire" ColumnName="prix_unitaire" />
+                <ScalarProperty Name="stock_dispo" ColumnName="stock_dispo" />
+                <ScalarProperty Name="id_FamilleRepas" ColumnName="id_FamilleRepas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profils">
+            <EntityTypeMapping TypeName="foodtruckModel.Profil">
+              <MappingFragment StoreEntitySet="Profil">
+                <ScalarProperty Name="id_Profil" ColumnName="id_Profil" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Repas">
+            <EntityTypeMapping TypeName="foodtruckModel.Repa">
+              <MappingFragment StoreEntitySet="Repas">
+                <ScalarProperty Name="id_Repas" ColumnName="id_Repas" />
+                <ScalarProperty Name="heure_limite" ColumnName="heure_limite" />
+                <ScalarProperty Name="imageurl" ColumnName="imageurl" />
+                <ScalarProperty Name="isenabled" ColumnName="isenabled" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Societes">
+            <EntityTypeMapping TypeName="foodtruckModel.Societe">
+              <MappingFragment StoreEntitySet="Societe">
+                <ScalarProperty Name="id_Societe" ColumnName="id_Societe" />
+                <ScalarProperty Name="code_postal" ColumnName="code_postal" />
+                <ScalarProperty Name="nom_Societe" ColumnName="nom_Societe" />
+                <ScalarProperty Name="num_rue" ColumnName="num_rue" />
+                <ScalarProperty Name="num_siren" ColumnName="num_siren" />
+                <ScalarProperty Name="num_siret" ColumnName="num_siret" />
+                <ScalarProperty Name="pays" ColumnName="pays" />
+                <ScalarProperty Name="rue" ColumnName="rue" />
+                <ScalarProperty Name="ville" ColumnName="ville" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatutCommandes">
+            <EntityTypeMapping TypeName="foodtruckModel.StatutCommande">
+              <MappingFragment StoreEntitySet="StatutCommande">
+                <ScalarProperty Name="id_StatutCommande" ColumnName="id_StatutCommande" />
+                <ScalarProperty Name="libelle_StatutCommande" ColumnName="libelle_StatutCommande" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utilisateurs">
+            <EntityTypeMapping TypeName="foodtruckModel.Utilisateur">
+              <MappingFragment StoreEntitySet="Utilisateur">
+                <ScalarProperty Name="id_Utilisateur" ColumnName="id_Utilisateur" />
+                <ScalarProperty Name="date_naissance" ColumnName="date_naissance" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="isenable" ColumnName="isenable" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="id_Genre" ColumnName="id_Genre" />
+                <ScalarProperty Name="id_Societe" ColumnName="id_Societe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FamilleRepas_Repas">
+            <EntityTypeMapping TypeName="foodtruckModel.FamilleRepas_Repas">
+              <MappingFragment StoreEntitySet="FamilleRepas_Repas">
+                <ScalarProperty Name="id_FamilleRepas" ColumnName="id_FamilleRepas" />
+                <ScalarProperty Name="id_Repas" ColumnName="id_Repas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfilUtilisateurs">
+            <EntityTypeMapping TypeName="foodtruckModel.ProfilUtilisateur">
+              <MappingFragment StoreEntitySet="ProfilUtilisateur">
+                <ScalarProperty Name="id_Profil" ColumnName="id_Profil" />
+                <ScalarProperty Name="id_Utilisateur" ColumnName="id_Utilisateur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
